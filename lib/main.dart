@@ -1,6 +1,7 @@
 import 'package:firebas_project/UI/HomrPage.dart';
 import 'package:firebas_project/UI/about_us.dart';
 import 'package:firebas_project/UI/contact_us.dart';
+import 'package:firebas_project/UI/team_work.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
       ),
      // home: HomePage(),
       //home: AboutUs(),
-      home: ContactUs(),
+      //home: ContactUs(),
+      home: TeamWork(),
     );
   }
 }
