@@ -1,7 +1,9 @@
+import 'package:firebas_project/UI/ContactPage.dart';
 import 'package:firebas_project/UI/HomrPage.dart';
 import 'package:firebas_project/UI/about_us.dart';
 import 'package:firebas_project/UI/contact_us.dart';
 import 'package:firebas_project/UI/team_work.dart';
+import 'package:firebas_project/UI/test1.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
@@ -31,7 +33,9 @@ class MyApp extends StatelessWidget {
      // home: HomePage(),
       //home: AboutUs(),
       //home: ContactUs(),
-      home: TeamWork(),
+    //  home: TeamWork(),
+     // home: PackagesGsk(),
+     home: ContactPage(),
     );
   }
 }
