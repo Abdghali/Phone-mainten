@@ -1,6 +1,7 @@
 import 'package:firebas_project/UI/loginPage.dart';
 import 'package:firebas_project/UI/registerPage.dart';
 import 'package:firebas_project/providers/GenderProvider.dart';
+import 'package:firebas_project/providers/userTypeProvider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,9 +29,9 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<GenderProvider>(
             create: (_) => GenderProvider(),
           ),
-          // ChangeNotifierProvider<DBExerciseProvider>(
-          //   create: (_) => DBExerciseProvider(),
-          // ),
+          ChangeNotifierProvider<UserTypeProvider>(
+            create: (_) => UserTypeProvider(),
+          ),
         
         ],
     child: GetMaterialApp(

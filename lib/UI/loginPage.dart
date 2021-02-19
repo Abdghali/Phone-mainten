@@ -1,6 +1,7 @@
 import 'package:firebas_project/Service/Server.dart';
 import 'package:firebas_project/UI/HomrPage.dart';
 import 'package:firebas_project/UI/Widgets/customTextField.dart';
+import 'package:firebas_project/UI/registerPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -89,7 +90,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Get.to(HomePage());
+                    Get.to(RigesterPage());
                   },
                   child: Text(
                     'Register Now',
