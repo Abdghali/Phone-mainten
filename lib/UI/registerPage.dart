@@ -199,9 +199,9 @@ class _RigesterPageState extends State<RigesterPage> {
               SizedBox(
                 height: 40,
               ),
-              CustomDropDownList(
+            Repository.repository.typeOfUser==userType.admin?  CustomDropDownList(
                 value: "software",
-              ),
+              ):Container(),
               SizedBox(
                 height: 60,
               ),

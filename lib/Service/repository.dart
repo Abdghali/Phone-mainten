@@ -5,6 +5,6 @@ class Repository {
 Repository._();
 static Repository repository = Repository._();
 User user;
-userType typeOfUser;
+userType typeOfUser=userType.customer;
 
 }
