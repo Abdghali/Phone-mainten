@@ -33,8 +33,8 @@ class LoginPage extends StatelessWidget {
       loginKey.currentState.save();
       String id = await loginUsingEmailAndPassword(email, password);
       if (id != null) {
-        // await loginToMyAPP(email, password); // Logger().e(user.name);
-        Get.offAll(HomePage());
+         await loginToMyAPP(email, password); // Logger().e(user.name);
+        // Get.offAll(HomePage());
       } else {
         return;
       }

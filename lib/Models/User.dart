@@ -9,7 +9,7 @@ class User {
   String idNumber;
   String city;
   userType type;
-  int gender;
+  int isMale;
 
   User(
       {this.id,
@@ -19,7 +19,7 @@ class User {
       this.phone,
       this.idNumber,
       this.city,
-      this.gender,
+      this.isMale,
       this.type});
 
   User.fromMap(Map map) {
@@ -31,7 +31,7 @@ class User {
     this.phone = map['phone'];
     this.idNumber = map['idNumber'];
     this.city = map['city'];
-    this.gender = map['isMale'];
+    this.isMale = map['isMale'];
     this.type = map['userType'] == 'admin'
         ? userType.admin
         : map['type'] == 'software'
@@ -50,7 +50,7 @@ class User {
       'phone': this.phone,
       'idNumber': this.idNumber,
       'city': this.city,
-      'isMale': this.gender,
+      'isMale': this.isMale,
       'userType': this.type.toString()
     };
   }

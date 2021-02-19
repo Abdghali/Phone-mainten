@@ -5,6 +5,7 @@ import 'package:firebas_project/Models/User.dart';
 import 'package:firebas_project/Service/Server.dart';
 import 'package:firebas_project/Service/repository.dart';
 import 'package:firebas_project/UI/Widgets/customTextField.dart';
+import 'package:firebas_project/UI/Widgets/custumRadioButton.dart';
 import 'package:firebas_project/providers/GenderProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -214,24 +215,4 @@ class _RigesterPageState extends State<RigesterPage> {
   }
 }
 
-class CustomRadio extends StatelessWidget {
-  String title;
-  int value;
-  CustomRadio({this.title, this.value});
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Radio<int>(
-          value: value,
-          groupValue: Provider.of<GenderProvider>(context, listen: true).isMail,
-          onChanged: (int value) {
-            Provider.of<GenderProvider>(context, listen: false)
-                .setIsMaleValue(value);
-          },
-        ),
-        Text('$title'),
-      ],
-    );
-  }
-}
+

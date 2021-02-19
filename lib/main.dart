@@ -1,3 +1,4 @@
+import 'package:firebas_project/UI/loginPage.dart';
 import 'package:firebas_project/UI/registerPage.dart';
 import 'package:firebas_project/providers/GenderProvider.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -68,7 +69,7 @@ class App extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
         // return HomePage();
        //  return LoginPage();
-          return RigesterPage();
+          return LoginPage();
         }
         // Otherwise, show something whilst waiting for initialization to complete
         return Loading();
