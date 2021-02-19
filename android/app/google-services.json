@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "356138577488",
+    "project_id": "phone-maintain",
+    "storage_bucket": "phone-maintain.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:356138577488:android:a9b06781306edac0b62b55",
+        "android_client_info": {
+          "package_name": "com.example.firebas_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "356138577488-7e4lr0is7higgepbk4bnkms58n8ui67l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVU0Lv5O5omlLMHLy3euQ0OSJZdzuIMOg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "356138577488-7e4lr0is7higgepbk4bnkms58n8ui67l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

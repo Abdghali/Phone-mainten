@@ -1,3 +1,4 @@
+import 'package:firebas_project/Service/Server.dart';
 import 'package:flutter/material.dart';
 class HomePage extends StatefulWidget {
   @override
@@ -9,7 +10,12 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Home Page"),),
-      body: Container(),
+      body: Container(
+        child: Center(child: RaisedButton(onPressed: (){
+
+          signOut();
+        }),),
+      ),
 
     );
   }

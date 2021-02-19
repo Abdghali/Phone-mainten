@@ -1,10 +1,15 @@
+import 'package:firebas_project/Service/Server.dart';
 import 'package:firebas_project/UI/HomrPage.dart';
 import 'package:firebas_project/UI/Widgets/customTextField.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:logger/logger.dart';
 
 class LoginPage extends StatelessWidget {
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
   GlobalKey<FormState> loginKey = GlobalKey();
   String email;
   String password;
@@ -23,11 +28,16 @@ class LoginPage extends StatelessWidget {
     }
   }
 
-  saveForm() {
+  saveForm() async {
     if (loginKey.currentState.validate()) {
       loginKey.currentState.save();
-
-      print("email : $email" + "Passworld: $password");
+      String id = await loginUsingEmailAndPassword(email, password);
+      if (id != null) {
+        // await loginToMyAPP(email, password); // Logger().e(user.name);
+        Get.offAll(HomePage());
+      } else {
+        return;
+      }
     } else {
       return;
     }
@@ -40,19 +50,19 @@ class LoginPage extends StatelessWidget {
         height: 866.2857142857143,
         allowFontScaling: true);
     return Scaffold(
-      appBar: AppBar(),
       body: Form(
         key: loginKey,
         child: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 20,vertical: 100),
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 100),
             child: Column(
               children: [
-               
                 Container(
                   height: 200.h,
                   width: 200.w,
-                  decoration: BoxDecoration(image:DecorationImage(image: AssetImage("assets/images/llogo.png")) ),
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage("assets/images/llogo.png"))),
                 ),
                 SizedBox(
                   height: 100.h,
