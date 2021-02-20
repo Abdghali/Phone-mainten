@@ -112,6 +112,7 @@ Future<String> uploadApplicationImage(File file) async {
 }
 
 saveApplication(Map map) async {
+  map['userId']=auth.currentUser.uid;
   Logger().e(Repository.repository.user.id);
   if(map['file']!=null){
   File file = map['file'];
