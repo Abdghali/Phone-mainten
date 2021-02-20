@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebas_project/Service/repository.dart';
-import 'package:firebas_project/UI/HomrPage.dart';
+import 'package:firebas_project/UI/pages/UserHomrPage.dart';
 import 'package:firebas_project/UI/loginPage.dart';
 import 'package:firebas_project/providers/GenderProvider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -60,7 +60,7 @@ saveUser(Map map) async {
   Repository.repository.typeOfUser = user.type;
   Repository.repository.user = user;
   Logger().e(user.toJson().toString());
-  Get.off(HomePage());
+  Get.off(UserHomePage());
 }
 
 Future<String> uploadImage(File file) async {
@@ -81,12 +81,13 @@ loginToMyAPP(String email, String password) async {
 fetchUserData(String userId) async {
   DocumentSnapshot documentSnapshot =await firestore.collection('users').doc(userId).get();
   Map userMap = documentSnapshot.data();
+  Logger().e(userMap);
   myUser.User user = myUser.User.fromMap(userMap);
   Repository.repository.typeOfUser = user.type;
   Repository.repository.user = user;
   Provider.of<GenderProvider>(Get.context, listen: false)
                 .setIsMaleValue(user.isMale);
-  Get.offAll(HomePage());
+  Get.offAll(UserHomePage());
 }
 
 updateUserInFirestore(Map map) async {
@@ -99,4 +100,31 @@ updateUserInFirestore(Map map) async {
 
   firestore.collection('users').doc(auth.currentUser.uid).update({...map});
   fetchUserData(auth.currentUser.uid);
+}
+Future<String> uploadApplicationImage(File file) async {
+  String filePath = file.path;
+  String fileName = filePath.split('/').last;
+  Reference reference = firebaseStorage.ref('Applications/$fileName');
+  TaskSnapshot taskSnapshot = await reference.putFile(file);
+  String url = await reference.getDownloadURL();
+  //logger.e(url);
+  return url;
+}
+
+saveApplication(Map map) async {
+  Logger().e(Repository.repository.user.id);
+  if(map['file']!=null){
+  File file = map['file'];
+  String imageUrl = await uploadApplicationImage(file);
+  map.remove('file');
+  map['imageUrl'] = imageUrl;
+  }
+  Map newMap=map;
+  Logger().e(newMap);
+  firestore.collection('applications').doc().set({...newMap});
+  // myUser.User user = myUser.User.fromMap(newMap);
+  // Repository.repository.typeOfUser = user.type;
+  // Repository.repository.user = user;
+  // Logger().e(user.toJson().toString());
+  // Get.off(UserHomePage());
 }

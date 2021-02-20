@@ -34,9 +34,9 @@ class User {
     this.isMale = map['isMale'];
     this.type = map['userType'] == 'admin'
         ? userType.admin
-        : map['type'] == 'software'
+        : map['userType'] == 'software'
             ? userType.software
-            : map['type'] == 'hardware'
+            : map['userType'] == 'hardware'
                 ? userType.hardware
                 : userType.customer;
   }

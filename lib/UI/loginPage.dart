@@ -1,6 +1,10 @@
+import 'package:firebas_project/Models/User.dart';
 import 'package:firebas_project/Service/Server.dart';
-import 'package:firebas_project/UI/HomrPage.dart';
+import 'package:firebas_project/Service/repository.dart';
+import 'package:firebas_project/UI/pages/ProfistionHomePage.dart';
+import 'package:firebas_project/UI/pages/UserHomrPage.dart';
 import 'package:firebas_project/UI/Widgets/customTextField.dart';
+import 'package:firebas_project/UI/pages/adminHomePage.dart';
 import 'package:firebas_project/UI/registerPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -34,8 +38,19 @@ class LoginPage extends StatelessWidget {
       loginKey.currentState.save();
       String id = await loginUsingEmailAndPassword(email, password);
       if (id != null) {
-         await loginToMyAPP(email, password); // Logger().e(user.name);
+        await loginToMyAPP(email, password); // Logger().e(user.name);
         // Get.offAll(HomePage());
+        if (Repository.repository.user.type == userType.customer) {
+          Get.offAll(UserHomePage());
+        } else if (Repository.repository.user.type == userType.admin) {
+          Get.offAll(AdminHomePage());
+        } else if (Repository.repository.user.type == userType.software) {
+          Get.offAll(ProfishionHomePage());
+        } else if (Repository.repository.user.type == userType.hardware) {
+          Get.offAll(ProfishionHomePage());
+        }
+
+        // todo
       } else {
         return;
       }

@@ -4,13 +4,19 @@ class CustomTextField extends StatelessWidget {
   Function validationFun;
   Function saveFun;
   String labelText;
-  CustomTextField({this.labelText, this.saveFun, this.validationFun});
+  int numberOfLine;
+  bool enable;
+  CustomTextField({this.labelText, this.saveFun, this.validationFun,this.numberOfLine,this.enable});
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Column(
       children: [
         TextFormField(
+          enabled:enable ,
+          keyboardType: TextInputType.multiline,
+          minLines: 1, //Normal textInputField will be displayed
+          maxLines: numberOfLine??1,
           validator: (value) => validationFun(value),
           decoration: InputDecoration(
               labelText: labelText,
