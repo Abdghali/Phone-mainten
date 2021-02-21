@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebas_project/UI/pages/adminPages/adminApplicationsPage.dart';
 import 'package:firebas_project/UI/pages/adminPages/adminDeliveredPhones.dart';
 import 'package:firebas_project/UI/pages/adminPages/adminPhonesPage.dart';
@@ -21,7 +22,7 @@ class _AdminHomePage extends State<AdminHomePage>
   void initState() {
     // TODO: implement initState
     super.initState();
-    
+
     tabController = TabController(
         length: 3,
         vsync: this); // vsync need pass the active class for tab bare
@@ -38,9 +39,32 @@ class _AdminHomePage extends State<AdminHomePage>
           child: Column(
             children: [
               UserAccountsDrawerHeader(
-                  // accountName: Text(Repository.repository.user.name??"admin"),
-                  // accountEmail: Text(Repository.repository.user.email??"admin@example.com"),
-                  ),
+                currentAccountPicture:
+                    Repository.repository.user.imageUrl != null
+                        ? CachedNetworkImage(
+                            imageUrl: Repository.repository.user.imageUrl,
+                            fit: BoxFit.cover,
+                          )
+                        : FlutterLogo(),
+                accountName: Text(Repository.repository.user.name ?? "admin"),
+                accountEmail: Text(
+                    Repository.repository.user.email ?? "admin@example.com"),
+              ),
+              ListTile(
+                leading: Icon(Icons.person),
+                title: Text('My Profile'),
+                onTap: () {
+                  Get.to(UserProfile());
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.home),
+                title: Text('My HomePage'),
+                onTap: () {
+                  Get.offAll(AdminHomePage());
+                },
+              ),
+              Divider(),
               ListTile(
                 leading: Icon(Icons.logout),
                 title: Text('LogOut'),
@@ -48,20 +72,12 @@ class _AdminHomePage extends State<AdminHomePage>
                   signOut();
                 },
               ),
-              ListTile(
-                leading: Icon(Icons.person),
-                title: Text('Profile'),
-                onTap: () {
-                  Get.to(UserProfile());
-                },
-              ),
             ],
           ),
         ),
         body: Scaffold(
           body: Container(
-            child: TabBarView(
-              controller: tabController, children: [
+            child: TabBarView(controller: tabController, children: [
               adminApplicationsPage(),
               adminPhonesPage(),
               adminDeliveredPhonesPage(),
@@ -72,7 +88,7 @@ class _AdminHomePage extends State<AdminHomePage>
               currentIndex: tabController.index,
               onTap: (value) {
                 tabController.animateTo(value);
-                tabController.index=value;
+                tabController.index = value;
                 setState(() {});
               },
               items: [
