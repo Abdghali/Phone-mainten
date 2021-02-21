@@ -1,24 +1,24 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebas_project/UI/ContactPage.dart';
-import 'package:firebas_project/UI/about_us.dart';
-import 'package:firebas_project/UI/pages/adminPages/adminApplicationsPage.dart';
-import 'package:firebas_project/UI/pages/adminPages/adminDeliveredPhones.dart';
-import 'package:firebas_project/UI/pages/adminPages/adminPhonesPage.dart';
-import 'package:firebas_project/UI/registerPage.dart';
-import 'package:firebas_project/UI/team_work.dart';
-import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebas_project/Service/Server.dart';
 import 'package:firebas_project/Service/repository.dart';
+import 'package:firebas_project/UI/ContactPage.dart';
 import 'package:firebas_project/UI/UserProfile.dart';
+import 'package:firebas_project/UI/about_us.dart';
+import 'package:firebas_project/UI/pages/AddApplicationPage.dart';
+import 'package:firebas_project/UI/pages/userPages/userApplicaation.dart';
+import 'package:firebas_project/UI/pages/userPages/userDeliverdPhone.dart';
+import 'package:firebas_project/UI/pages/userPages/userNotYetPhone%20.dart';
+import 'package:firebas_project/UI/team_work.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AdminHomePage extends StatefulWidget {
+class UserHomePage extends StatefulWidget {
   @override
-  _AdminHomePage createState() => _AdminHomePage();
+  _UserHomePageState createState() => _UserHomePageState();
 }
 
-class _AdminHomePage extends State<AdminHomePage>
+class _UserHomePageState extends State<UserHomePage>
     with SingleTickerProviderStateMixin {
   TabController tabController;
 
@@ -37,7 +37,7 @@ class _AdminHomePage extends State<AdminHomePage>
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Admin Home Page"),
+          title: Text("CHome Page"),
         ),
         drawer: Drawer(
           child: Column(
@@ -50,9 +50,9 @@ class _AdminHomePage extends State<AdminHomePage>
                             fit: BoxFit.cover,
                           )
                         : FlutterLogo(),
-                accountName: Text(Repository.repository.user.name ?? "admin"),
+                accountName: Text(Repository.repository.user.name ?? "user"),
                 accountEmail: Text(
-                    Repository.repository.user.email ?? "admin@example.com"),
+                    Repository.repository.user.email ?? "user@example.com"),
               ),
               ListTile(
                 leading: Icon(Icons.person),
@@ -65,35 +65,28 @@ class _AdminHomePage extends State<AdminHomePage>
                 leading: Icon(Icons.home),
                 title: Text('My HomePage'),
                 onTap: () {
-                  Get.offAll(AdminHomePage());
+                  Get.offAll(UserHomePage());
                 },
               ),
-               ListTile(
+              ListTile(
                 leading: Icon(Icons.home),
                 title: Text('Contact us'),
                 onTap: () {
                   Get.to(ContactPage());
                 },
               ),
-               ListTile(
+              ListTile(
                 leading: Icon(Icons.home),
                 title: Text('About Us'),
                 onTap: () {
                   Get.to(AboutUs());
                 },
               ),
-               ListTile(
+              ListTile(
                 leading: Icon(Icons.home),
                 title: Text('Team Work'),
                 onTap: () {
                   Get.to(TeamWork());
-                },
-              ),
-                ListTile(
-                leading: Icon(Icons.plus_one),
-                title: Text('Rigester new TW'),
-                onTap: () {
-                  Get.to(RigesterPage());
                 },
               ),
               Divider(),
@@ -110,9 +103,9 @@ class _AdminHomePage extends State<AdminHomePage>
         body: Scaffold(
           body: Container(
             child: TabBarView(controller: tabController, children: [
-              adminApplicationsPage(),
-              adminPhonesPage(),
-              adminDeliveredPhonesPage(),
+              UserApplicationsPage(),
+              UseruserNotYetPhonePage(),
+              UseruserDeliverdPhonePage(),
             ]),
           ),
           bottomNavigationBar: BottomNavigationBar(
@@ -132,5 +125,12 @@ class _AdminHomePage extends State<AdminHomePage>
                     label: 'Deliverd Phones', icon: Icon(Icons.done)),
               ]),
         ));
+    floatingActionButton:
+    FloatingActionButton(
+      onPressed: () {
+        Get.to(AddApplicationPage());
+      },
+      child: Icon(Icons.add),
+    );
   }
 }

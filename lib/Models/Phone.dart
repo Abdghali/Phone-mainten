@@ -1,7 +1,8 @@
-enum status { application, notYet, done, delivered }
 
-class Application {
-  int appID;
+import 'package:firebas_project/Models/Application.dart';
+
+class Phone {
+  String phID;
   String imageUrl;
   String phoneType;
   String phineColor;
@@ -14,8 +15,8 @@ class Application {
   String softwareNote;
   String hardwareNote;
 
-  Application(
-      {this.appID,
+  Phone(
+      {this.phID,
       this.contactNumber,
       this.hardwareIssue,
       this.imageUrl,
@@ -28,9 +29,9 @@ class Application {
       this.softwareNote,
       this.userNote});
       
-  Application.fromMap(Map map) {
+  Phone.fromMap(Map map) {
     // logger.e(map);
-    this.appID = map['appID'];
+    this.phID = map['appID'];
     this.imageUrl = map['imageUrl'];
     this.phoneType = map['phoneType'];
     this.phineColor = map['phineColor'];
@@ -52,7 +53,7 @@ class Application {
 
   toJson() {
     return {
-      'appID': this.appID,
+      'appID': this.phID,
       'imageUrl': this.imageUrl,
       'phoneType': this.phoneType,
       'phineColor': this.phineColor,

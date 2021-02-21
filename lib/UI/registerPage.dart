@@ -9,6 +9,7 @@ import 'package:firebas_project/UI/Widgets/custumRadioButton.dart';
 import 'package:firebas_project/providers/GenderProvider.dart';
 import 'package:firebas_project/providers/userTypeProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
@@ -214,6 +215,7 @@ class _RigesterPageState extends State<RigesterPage> {
                     child: Text('REGISTER'),
                     onPressed: () async {
                       saveForm();
+                      Get.back();
                     }),
               ),
               SizedBox(

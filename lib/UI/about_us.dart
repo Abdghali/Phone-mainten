@@ -80,7 +80,7 @@ class CustomContainer extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(50.0)),
           color: Colors.grey),
-      child: Center(child: FlutterLogo()),
+      child: Center(child: Image.asset("assets/images/llogo.png")),
     );
   }
 }

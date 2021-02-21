@@ -1,8 +1,10 @@
 import 'package:firebas_project/UI/loginPage.dart';
 import 'package:firebas_project/UI/pages/adminPages/adminHomePage.dart';
 import 'package:firebas_project/UI/registerPage.dart';
+import 'package:firebas_project/UI/splashScreen.dart';
 import 'package:firebas_project/providers/GenderProvider.dart';
 import 'package:firebas_project/providers/IssueProvider.dart';
+import 'package:firebas_project/providers/StatusProvider.dart';
 import 'package:firebas_project/providers/userTypeProvider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +25,7 @@ runApp(LocalizedApp(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
+  
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -36,6 +39,9 @@ class MyApp extends StatelessWidget {
           ),
           ChangeNotifierProvider<IssueProvider>(
             create: (_) => IssueProvider(),
+          ),
+          ChangeNotifierProvider<StatusProvider>(
+            create: (_) => StatusProvider(),
           ),
         
         ],
@@ -53,6 +59,7 @@ class MyApp extends StatelessWidget {
      //home: ContactPage(),
     // home: LoginPage(),
      home: App(),
+    // home: SplachScreen(),
      //home: AdminHomePage(),
     ));
   }

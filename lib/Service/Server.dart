@@ -1,8 +1,9 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebas_project/Service/LastAppIdRepository.dart';
 import 'package:firebas_project/Service/repository.dart';
-import 'package:firebas_project/UI/pages/UserHomrPage.dart';
+import 'package:firebas_project/UI/pages/userPages/UserHomrPage.dart';
 import 'package:firebas_project/UI/loginPage.dart';
 import 'package:firebas_project/providers/GenderProvider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -147,4 +148,47 @@ Stream<QuerySnapshot> deliveredApplications =firestore.collection('phones').wher
 
 return deliveredApplications;
 
+}
+
+savePhone(Map map){
+  
+  firestore.collection('phones').doc().set({...map});
+firestore.collection('applications').where('phoneState',isEqualTo:"notYet").get();
+
+
+}
+
+getLastApplicationId()async{
+  DocumentSnapshot documentSnapshot =await firestore.collection('IDS').doc('MatUbILQ69VI7gyHrqLJ').get();
+  Map IDMap = documentSnapshot.data();
+  LastAppIdRepository.repository.lastAppId=IDMap['LastApplicationIDS'];
+}
+setLastApplicationId()async{
+await firestore.collection('IDS').doc('MatUbILQ69VI7gyHrqLJ').update({'LastApplicationIDS':LastAppIdRepository.repository.lastAppId});
+}
+removePhone(int appId)async{
+  // todo
+QuerySnapshot  Data =await firestore.collection('applications').where('appID',isEqualTo:appId).get();
+Logger().e(Data.docs.toString());
+
+}
+
+
+Stream<QuerySnapshot> getAllUserApplication(){
+  Stream<QuerySnapshot> Userapplications =firestore.collection('applications').where('userId',isEqualTo:auth.currentUser.uid).snapshots();
+Logger().e(Userapplications.map((event) => print(event)));
+return Userapplications;
+}
+
+Stream<QuerySnapshot> getAllUserDeliverdPhone(){
+  Stream<QuerySnapshot> Userapplications =firestore.collection('phones').where('userId',isEqualTo:auth.currentUser.uid).where('phoneState',isEqualTo:"delivered").snapshots();
+return Userapplications;
+}
+Stream<QuerySnapshot> getAllUserNotYetPhone(){
+  Stream<QuerySnapshot> Userapplications =firestore.collection('phones').where('userId',isEqualTo:auth.currentUser.uid).where('phoneState',isEqualTo:"notYet").snapshots();
+return Userapplications;
+}
+
+getUserId(){
+  return auth.currentUser.uid ??null;
 }

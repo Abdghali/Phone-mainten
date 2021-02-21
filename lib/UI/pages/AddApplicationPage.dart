@@ -5,10 +5,10 @@ import 'package:firebas_project/Service/repository.dart';
 import 'package:firebas_project/UI/Widgets/customTextField.dart';
 import 'package:firebas_project/providers/IssueProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
-
 
 class AddApplicationPage extends StatefulWidget {
   @override
@@ -69,13 +69,11 @@ class _AddApplicationPageState extends State<AddApplicationPage> {
     } else if (phoneState == 'done') {
       this.phoneState = status.done;
     } else if (phoneState == 'delivered') {
-    this.phoneState = status.delivered;
-    } else{
+      this.phoneState = status.delivered;
+    } else {
       this.phoneState = status.notYet;
     }
   }
-
-  
 
   saveUserNot(String userNote1) {
     this.userNote = userNote1;
@@ -258,6 +256,7 @@ class _AddApplicationPageState extends State<AddApplicationPage> {
                         child: Text('Submit'),
                         onPressed: () async {
                           saveForm();
+                          Get.back();
                         }),
                   ),
                   SizedBox(

@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebas_project/Models/Application.dart';
+import 'package:firebas_project/Service/PhoneRepository.dart';
 import 'package:firebas_project/Service/Server.dart';
+import 'package:firebas_project/UI/pages/ApplicationInfoPage.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
 class adminPhonesPage extends StatelessWidget {
@@ -21,18 +24,25 @@ class adminPhonesPage extends StatelessWidget {
           return ListView.builder(
               itemCount: applications.length,
               itemBuilder: (contex, index) {
-                return Column(
-                  children: [
-                    ListTile(
-                      leading: Icon(Icons.settings_applications_sharp),
-                      title: Text(applications[index].phoneType),
-                      subtitle: Text(
-                        applications[index].phineColor,
-                        style: TextStyle(color: Colors.blue[300]),
+                return InkWell(
+                  onTap: () {
+                    PhoneRepository.repository.application =
+                        applications[index];
+                    Get.to(ApplicationInfoPage());
+                  },
+                  child: Column(
+                    children: [
+                      ListTile(
+                        leading: Icon(Icons.settings_applications_sharp),
+                        title: Text(applications[index].phoneType),
+                        subtitle: Text(
+                          applications[index].phineColor,
+                          style: TextStyle(color: Colors.blue[300]),
+                        ),
                       ),
-                    ),
-                    Divider(),
-                  ],
+                      Divider(),
+                    ],
+                  ),
                 );
               });
         } else {

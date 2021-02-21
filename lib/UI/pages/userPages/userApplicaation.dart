@@ -7,11 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
-class adminDeliveredPhonesPage extends StatelessWidget {
+class UserApplicationsPage extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: getAllDeliveredPhonesStream(),
+      stream: getAllUserApplication(),
       builder: (BuildContext, AsyncSnapshot<QuerySnapshot> data) {
         if (data.hasError) {
         } else if (data.hasData) {
@@ -28,8 +29,7 @@ class adminDeliveredPhonesPage extends StatelessWidget {
                   onTap: () {
                     PhoneRepository.repository.application =
                         applications[index];
-                                                Get.to(ApplicationInfoPage());
-
+                        Get.to(ApplicationInfoPage());
                   },
                   child: Column(
                     children: [
