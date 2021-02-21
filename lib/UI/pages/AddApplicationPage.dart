@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:firebas_project/Models/Application.dart';
 import 'package:firebas_project/Service/Server.dart';
 import 'package:firebas_project/Service/repository.dart';
 import 'package:firebas_project/UI/Widgets/customTextField.dart';
@@ -8,7 +9,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
-enum status { application, notYet, done, delivered }
 
 class AddApplicationPage extends StatefulWidget {
   @override

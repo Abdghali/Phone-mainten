@@ -129,3 +129,22 @@ saveApplication(Map map) async {
   // Logger().e(user.toJson().toString());
   // Get.off(UserHomePage());
 }
+
+Stream<QuerySnapshot> getAllApplicationsStream(){
+Stream<QuerySnapshot> applications =firestore.collection('applications').where('phoneState',isEqualTo:"application").snapshots();
+
+return applications;
+
+}
+Stream<QuerySnapshot> getAllPhonesStream(){
+Stream<QuerySnapshot> applications =firestore.collection('phones').where('phoneState',isEqualTo:"notYet").snapshots();
+
+return applications;
+
+}
+Stream<QuerySnapshot> getAllDeliveredPhonesStream(){
+Stream<QuerySnapshot> deliveredApplications =firestore.collection('phones').where('phoneState',isEqualTo:"delivered").snapshots();
+
+return deliveredApplications;
+
+}

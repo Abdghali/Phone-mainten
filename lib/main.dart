@@ -1,4 +1,5 @@
 import 'package:firebas_project/UI/loginPage.dart';
+import 'package:firebas_project/UI/pages/adminPages/adminHomePage.dart';
 import 'package:firebas_project/UI/registerPage.dart';
 import 'package:firebas_project/providers/GenderProvider.dart';
 import 'package:firebas_project/providers/IssueProvider.dart';
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
      //home: ContactPage(),
     // home: LoginPage(),
      home: App(),
+     //home: AdminHomePage(),
     ));
   }
 }

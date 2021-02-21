@@ -4,7 +4,7 @@ import 'package:firebas_project/Service/repository.dart';
 import 'package:firebas_project/UI/pages/ProfistionHomePage.dart';
 import 'package:firebas_project/UI/pages/UserHomrPage.dart';
 import 'package:firebas_project/UI/Widgets/customTextField.dart';
-import 'package:firebas_project/UI/pages/adminHomePage.dart';
+import 'package:firebas_project/UI/pages/adminPages/adminHomePage.dart';
 import 'package:firebas_project/UI/registerPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
