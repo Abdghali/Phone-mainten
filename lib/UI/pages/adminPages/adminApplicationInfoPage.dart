@@ -6,10 +6,13 @@ import 'package:firebas_project/Service/PhoneRepository.dart';
 import 'package:firebas_project/Service/Server.dart';
 import 'package:firebas_project/Service/repository.dart';
 import 'package:firebas_project/UI/Widgets/customTextField.dart';
+import 'package:firebas_project/UI/Widgets/custumRadioButton2.dart';
 import 'package:firebas_project/providers/IssueProvider.dart';
+import 'package:firebas_project/providers/StatusProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 import '../../../Models/User.dart';
 
@@ -111,8 +114,10 @@ class _AdminApplicationInfoPage extends State<AdminApplicationInfoPage> {
 
   saveForm() {
     formKey.currentState.save();
-       getLastApplicationId();
-
+    getLastApplicationId();
+    // Provider.of<StatusPageProvider>(context, listen: false)
+    //     .getPhoneStatePhone();
+    Logger().e(PhoneRepository.repository.application.phoneState.toString());
     updatePhone({
       "appID": PhoneRepository.repository.application.appID,
       'userId': PhoneRepository.repository.application.userId ?? "",
@@ -134,11 +139,18 @@ class _AdminApplicationInfoPage extends State<AdminApplicationInfoPage> {
           PhoneRepository.repository.application.softwareNote,
       'shardwareNote': this.hardwareNote ??
           PhoneRepository.repository.application.hardwareNote,
-      'phoneState': status.delivered.toString().split('.').last,
-     //'phoneState':this.phoneState.toString().split('.').last ?? status.notYet.toString().split('.').last,
+      'phoneState': PhoneRepository.repository.pageCurentState ==
+              pageStatuse.delivaredPage
+          ? status.notYet.toString().split('.').last
+          : status.delivered.toString().split('.').last,
+      // 'phoneState': PhoneRepository.repository.application.phoneState
+      //     .toString()
+      //     .split(".")
+      //     .last,
+      //'phoneState':this.phoneState.toString().split('.').last ?? status.notYet.toString().split('.').last,
       'file': this.file
     });
-   // setLastApplicationId();
+    setLastApplicationId();
 
 //Todo
     Fluttertoast.showToast(msg: "submited sucessfully");
@@ -149,6 +161,10 @@ class _AdminApplicationInfoPage extends State<AdminApplicationInfoPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    Provider.of<StatusPageProvider>(Get.context, listen: true)
+        .setStatusePhoneAsNumber();
+    Logger().e(PhoneRepository.repository.pageCurentState);
+    Logger().e(PhoneRepository.repository.application.phoneState.toString());
     if (Repository.repository.user.type == userType.customer) {
       enable = false;
     } else {
@@ -275,12 +291,7 @@ class _AdminApplicationInfoPage extends State<AdminApplicationInfoPage> {
                   SizedBox(
                     height: 20,
                   ),
-                  // Container(
-                  //     alignment: Alignment.topLeft,
-                  //     child: Text(
-                  //       "Gender*",
-                  //       textAlign: TextAlign.start,
-                  //     )),
+
                   CustomContainer(
                     title: "Price",
                     value: "0.0",
@@ -298,6 +309,33 @@ class _AdminApplicationInfoPage extends State<AdminApplicationInfoPage> {
                     //  validationFunction: nullValidation,
                     enable: enable,
                   ),
+                  // Container(
+                  //     alignment: Alignment.topLeft,
+                  //     child: Text(
+                  //       "Statuse*",
+                  //       textAlign: TextAlign.start,
+                  //     )),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //   children: <Widget>[
+                  //     CustomRadio2(
+                  //       title: "Not Yet",
+                  //       value: PhoneRepository.repository.application.phoneState  !=
+                  //               status.delivered
+                  //           ? 0
+                  //           : 1,
+                  //     ),
+                  //     CustomRadio2(
+                  //       title: "Delivard",
+                  //       value: PhoneRepository.repository.application.phoneState  !=
+                  //               status.delivered
+                  //           ? 1
+                  //           : 0,
+
+                  //       //value:Provider.of<StatusPageProvider>(Get.context, listen: true).isDeliverd==0?1:0 ,
+                  //     ),
+                  //   ],
+                  // ),
                   SizedBox(
                     height: 40,
                   ),
@@ -314,7 +352,8 @@ class _AdminApplicationInfoPage extends State<AdminApplicationInfoPage> {
                           child: RaisedButton(
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20)),
-                              child: Text('Deliverd'),
+                              child: Text(
+                                  '${PhoneRepository.repository.pageCurentState == pageStatuse.delivaredPage ? "Change to Not Yet statuse" : "Deliverd"}'),
                               onPressed: () async {
                                 saveForm();
                                 Get.back();

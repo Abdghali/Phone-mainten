@@ -1,23 +1,34 @@
 import 'package:firebas_project/Models/Application.dart';
 import 'package:firebas_project/Models/Application.dart';
+import 'package:firebas_project/Service/PhoneRepository.dart';
 import 'package:flutter/cupertino.dart';
 
-class StatusProvider extends ChangeNotifier {
-  int isApplication=0;
-  int isNotYte=0;
-  int isDeliverd=0;
+class StatusPageProvider extends ChangeNotifier {
+  int isDeliverd = 0;
 
-  setisApplicationalue(int iisApplicationValue) {
-    this.isApplication = iisApplicationValue;
-    notifyListeners();
-  }
-   setisIsNotYteValue(int isNotYteValue) {
-    this.isNotYte = isNotYteValue;
-    notifyListeners();
-  }
-   setisIsDeliverdValue(int isDeliverdValue) {
+  setIsDeliverdValue(int isDeliverdValue) {
     this.isDeliverd = isDeliverdValue;
     notifyListeners();
   }
- 
+
+  getPhoneStatePhone() {
+    if (isDeliverd == 1) {
+       PhoneRepository.repository.application.phoneState= status.notYet;
+    } else if (isDeliverd == 0) {
+      PhoneRepository.repository.application.phoneState=  status.delivered;
+    } else {
+      PhoneRepository.repository.application.phoneState=  status.application;
+    }
+  }
+
+  setStatusePhoneAsNumber() {
+    if (PhoneRepository.repository.application.phoneState == status.notYet) {
+      isDeliverd= 0;
+    } else if (PhoneRepository.repository.application.phoneState ==
+        status.delivered) {
+      isDeliverd= 1;
+    } else {
+      return -1;
+    }
+  }
 }

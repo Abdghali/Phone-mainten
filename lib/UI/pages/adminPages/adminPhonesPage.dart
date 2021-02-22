@@ -29,6 +29,9 @@ class adminPhonesPage extends StatelessWidget {
                   onTap: () {
                     PhoneRepository.repository.application =
                         applications[index];
+                    PhoneRepository.repository.pageCurentState =
+                        pageStatuse.notYetPage;
+
                     Get.to(AdminApplicationInfoPage());
                   },
                   child: Column(

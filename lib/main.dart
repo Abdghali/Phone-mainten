@@ -40,8 +40,8 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<IssueProvider>(
             create: (_) => IssueProvider(),
           ),
-          ChangeNotifierProvider<StatusProvider>(
-            create: (_) => StatusProvider(),
+          ChangeNotifierProvider<StatusPageProvider>(
+            create: (_) => StatusPageProvider(),
           ),
         
         ],
