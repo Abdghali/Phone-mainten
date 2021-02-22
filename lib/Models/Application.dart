@@ -1,7 +1,10 @@
+import 'package:logger/logger.dart';
+
 enum status { application, notYet, done, delivered }
 
 class Application {
-  int appID;
+  String appID;
+  String userId;
   String imageUrl;
   String phoneType;
   String phineColor;
@@ -15,7 +18,9 @@ class Application {
   String hardwareNote;
 
   Application(
-      {this.appID,
+      {
+        this.appID,
+        this.userId,
       this.contactNumber,
       this.hardwareIssue,
       this.imageUrl,
@@ -29,8 +34,9 @@ class Application {
       this.userNote});
       
   Application.fromMap(Map map) {
-    // logger.e(map);
+    // Logger().e(map);
     this.appID = map['appID'];
+    this.userId = map['userId'];
     this.imageUrl = map['imageUrl'];
     this.phoneType = map['phoneType'];
     this.phineColor = map['phineColor'];

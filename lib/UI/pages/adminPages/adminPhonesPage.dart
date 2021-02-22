@@ -3,6 +3,7 @@ import 'package:firebas_project/Models/Application.dart';
 import 'package:firebas_project/Service/PhoneRepository.dart';
 import 'package:firebas_project/Service/Server.dart';
 import 'package:firebas_project/UI/pages/ApplicationInfoPage.dart';
+import 'package:firebas_project/UI/pages/adminPages/adminApplicationInfoPage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
@@ -28,7 +29,7 @@ class adminPhonesPage extends StatelessWidget {
                   onTap: () {
                     PhoneRepository.repository.application =
                         applications[index];
-                    Get.to(ApplicationInfoPage());
+                    Get.to(AdminApplicationInfoPage());
                   },
                   child: Column(
                     children: [

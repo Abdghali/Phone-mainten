@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:firebas_project/Models/Application.dart';
+import 'package:firebas_project/Service/LastAppIdRepository.dart';
 import 'package:firebas_project/Service/Server.dart';
 import 'package:firebas_project/Service/repository.dart';
 import 'package:firebas_project/UI/Widgets/customTextField.dart';
@@ -98,8 +99,9 @@ class _AddApplicationPageState extends State<AddApplicationPage> {
   saveForm() {
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
-
+       getLastApplicationId();
       saveApplication({
+        'appID': '${LastAppIdRepository.repository.lastAppId+=1}',
         'userId': Repository.repository.user.id,
         'imageUrl': this.imageUrl,
         'phoneType': this.phoneType,
@@ -111,11 +113,11 @@ class _AddApplicationPageState extends State<AddApplicationPage> {
         'userNote': this.userNote,
         'softwareNote': this.softwareNote,
         'shardwareNote': this.hardwareNote,
-        'phoneState': this.phoneState.toString().split('.').last ??
-            status.notYet.toString().split('.').last,
+        'phoneState': status.application.toString().split('.').last,
         // 'phoneState':this.phoneState.toString().split('.').last ?? status.notYet.toString().split('.').last,
         'file': this.file
       });
+      setLastApplicationId();
     } else {
       return;
     }
@@ -266,7 +268,9 @@ class _AddApplicationPageState extends State<AddApplicationPage> {
               ),
             ),
           ),
-        ));
+        )
+        
+        );
   }
 }
 

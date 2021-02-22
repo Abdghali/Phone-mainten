@@ -84,6 +84,7 @@ class App extends StatelessWidget {
         // return HomePage();
        //  return LoginPage();
           return LoginPage();
+          //return SplachScreen();
         }
         // Otherwise, show something whilst waiting for initialization to complete
         return Loading();

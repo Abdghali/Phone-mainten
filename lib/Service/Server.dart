@@ -113,6 +113,8 @@ Future<String> uploadApplicationImage(File file) async {
 }
 
 saveApplication(Map map) async {
+  Logger().e(map);
+  getLastApplicationId();
   map['userId']=auth.currentUser.uid;
   Logger().e(Repository.repository.user.id);
   if(map['file']!=null){
@@ -123,12 +125,24 @@ saveApplication(Map map) async {
   }
   Map newMap=map;
   Logger().e(newMap);
-  firestore.collection('applications').doc().set({...newMap});
+
+  firestore.collection('applications').doc(newMap['appID']).set({...newMap});
+   setLastApplicationId();
   // myUser.User user = myUser.User.fromMap(newMap);
   // Repository.repository.typeOfUser = user.type;
   // Repository.repository.user = user;
   // Logger().e(user.toJson().toString());
   // Get.off(UserHomePage());
+}
+
+// Todo
+updatePhone(Map map) async {
+  Logger().e(map);
+  getLastApplicationId();
+  map['userId']=auth.currentUser.uid;
+  Map newMap=map;
+  firestore.collection('phones').doc(newMap['appID']).update({...newMap});
+
 }
 
 Stream<QuerySnapshot> getAllApplicationsStream(){
@@ -152,8 +166,7 @@ return deliveredApplications;
 
 savePhone(Map map){
   
-  firestore.collection('phones').doc().set({...map});
-firestore.collection('applications').where('phoneState',isEqualTo:"notYet").get();
+  firestore.collection('phones').doc(map['appID']).set({...map});
 
 
 }
@@ -166,17 +179,17 @@ getLastApplicationId()async{
 setLastApplicationId()async{
 await firestore.collection('IDS').doc('MatUbILQ69VI7gyHrqLJ').update({'LastApplicationIDS':LastAppIdRepository.repository.lastAppId});
 }
-removePhone(int appId)async{
+removePhone(String appId)async{
   // todo
-QuerySnapshot  Data =await firestore.collection('applications').where('appID',isEqualTo:appId).get();
-Logger().e(Data.docs.toString());
+await firestore.collection('applications').doc(appId).delete();
+ 
 
 }
 
 
 Stream<QuerySnapshot> getAllUserApplication(){
   Stream<QuerySnapshot> Userapplications =firestore.collection('applications').where('userId',isEqualTo:auth.currentUser.uid).snapshots();
-Logger().e(Userapplications.map((event) => print(event)));
+//Logger().e(Userapplications.map((event) => print(event)));
 return Userapplications;
 }
 
@@ -190,5 +203,5 @@ return Userapplications;
 }
 
 getUserId(){
-  return auth.currentUser.uid ??null;
+  return auth.currentUser.uid==null ? auth.currentUser.uid:null;
 }

@@ -11,14 +11,14 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import '../../Models/User.dart';
+import '../../../Models/User.dart';
 
-class ApplicationInfoPage extends StatefulWidget {
+class AdminApplicationInfoPage extends StatefulWidget {
   @override
-  _ApplicationInfoPageState createState() => _ApplicationInfoPageState();
+  _AdminApplicationInfoPage createState() => _AdminApplicationInfoPage();
 }
 
-class _ApplicationInfoPageState extends State<ApplicationInfoPage> {
+class _AdminApplicationInfoPage extends State<AdminApplicationInfoPage> {
   String imageUrl;
 
   String phoneType;
@@ -113,7 +113,7 @@ class _ApplicationInfoPageState extends State<ApplicationInfoPage> {
     formKey.currentState.save();
        getLastApplicationId();
 
-    savePhone({
+    updatePhone({
       "appID": PhoneRepository.repository.application.appID,
       'userId': PhoneRepository.repository.application.userId ?? "",
       'imageUrl':
@@ -134,12 +134,13 @@ class _ApplicationInfoPageState extends State<ApplicationInfoPage> {
           PhoneRepository.repository.application.softwareNote,
       'shardwareNote': this.hardwareNote ??
           PhoneRepository.repository.application.hardwareNote,
-      'phoneState': "notYet",
-      // 'phoneState':this.phoneState.toString().split('.').last ?? status.notYet.toString().split('.').last,
+      'phoneState': status.delivered.toString().split('.').last,
+     //'phoneState':this.phoneState.toString().split('.').last ?? status.notYet.toString().split('.').last,
       'file': this.file
     });
-    setLastApplicationId();
-    removePhone(PhoneRepository.repository.application.appID);
+   // setLastApplicationId();
+
+//Todo
     Fluttertoast.showToast(msg: "submited sucessfully");
   }
 
@@ -313,7 +314,7 @@ class _ApplicationInfoPageState extends State<ApplicationInfoPage> {
                           child: RaisedButton(
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20)),
-                              child: Text('Submit'),
+                              child: Text('Deliverd'),
                               onPressed: () async {
                                 saveForm();
                                 Get.back();

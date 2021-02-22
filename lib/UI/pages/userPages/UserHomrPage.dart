@@ -67,6 +67,12 @@ class _UserHomePageState extends State<UserHomePage>
                 onTap: () {
                   Get.offAll(UserHomePage());
                 },
+              ), ListTile(
+                leading: Icon(Icons.home),
+                title: Text('Apply Application'),
+                onTap: () {
+                  Get.to((AddApplicationPage()));
+                },
               ),
               ListTile(
                 leading: Icon(Icons.home),
