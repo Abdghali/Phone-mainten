@@ -100,6 +100,7 @@ class _AddApplicationPageState extends State<AddApplicationPage> {
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
        getLastApplicationId();
+       Logger().e(LastAppIdRepository.repository.lastAppId);
       saveApplication({
         'appID': '${LastAppIdRepository.repository.lastAppId+=1}',
         'userId': Repository.repository.user.id,
